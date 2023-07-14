@@ -14,7 +14,7 @@ class NBAStatisticApp:
         option = st.selectbox(
             'Escolha uma Opção:',
             ('Descobrir ID Jogador', 'Dados Jogador', 'Jogador x Jogador', 'Detalhes Time',
-             'Todos os Times e seu ID', 'Historico das Franquias', 'Draftados')
+             'Todos os Times e seu ID', 'Historico das Franquias','Desempenho de Equipe por Temp','Draftados')
         )
 
         st.write('Selecionado:', option)
@@ -39,6 +39,9 @@ class NBAStatisticApp:
 
         elif option == 'Historico das Franquias':
             self.franchise_history()
+
+        elif option == 'Desempenho de Equipe por Temp':
+            self.team_stats_years()
 
     def discover_player_id(self):
         message = st.chat_message('assistant')
@@ -192,6 +195,11 @@ class NBAStatisticApp:
         except json.JSONDecodeError:
             st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
+    def team_stats_years():
+        st.write('em prod')
+
+
+# TODO: Criar função para tratar dados e gerar grafico das estatistica do time 
 
 app = NBAStatisticApp()
 app.run()
