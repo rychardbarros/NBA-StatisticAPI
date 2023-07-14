@@ -46,4 +46,8 @@ class API():
         data = response.json()
         return data
 
-    
+    def get_team_year_stats(self, team_year_stats):
+        url = f'{self.base_url}/team/stats/{team_year_stats}'
+        response = requests.get(url)
+        data = response.json()
+        return data
