@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from nba_api.stats.endpoints import playercareerstats, teamdetails, playervsplayer, drafthistory, franchisehistory
+from nba_api.stats.endpoints import playercareerstats, teamdetails, playervsplayer, drafthistory, franchisehistory, teamyearbyyearstats
 from nba_api.stats.static import players, teams
 
 app = Flask(__name__)
@@ -54,6 +54,14 @@ def franchise():
     franchise_get = franchisehistory.FranchiseHistory()
     franchise_result = franchise_get.get_json()
     return franchise_result
+
+@app.route('/team/stats/<id>', methods=['GET'])
+def team_year_stats(id):
+    team_year_get = teamyearbyyearstats.TeamYearByYearStats(team_id=id)
+    team_year_result = team_year_get.get_json()
+    return team_year_result
+
+# TODO: Criar rota para receber estatistica dos times em cada temporada
 
 
 if __name__ == '__main__':
