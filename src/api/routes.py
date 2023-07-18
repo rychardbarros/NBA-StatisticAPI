@@ -61,8 +61,5 @@ def team_year_stats(id):
     team_year_result = team_year_get.get_json()
     return team_year_result
 
-# TODO: Criar rota para receber estatistica dos times em cada temporada
-
-
 if __name__ == '__main__':
     app.run(debug=True)

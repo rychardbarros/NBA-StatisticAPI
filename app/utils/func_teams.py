@@ -3,7 +3,6 @@ import pandas as pd
 import json
 from src.api.service import API
 
-
 class NBAFunctionsTeams():
     def __init__(self):
         self.api = API(base_url="http://localhost:5000")
