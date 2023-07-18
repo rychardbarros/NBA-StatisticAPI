@@ -196,7 +196,7 @@ class NBAStatisticApp:
             st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def team_stats_years():
-        st.write('em prod')
+        st.write('')
 
 
 # TODO: Criar função para tratar dados e gerar grafico das estatistica do time 
