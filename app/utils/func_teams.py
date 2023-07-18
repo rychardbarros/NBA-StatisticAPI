@@ -83,13 +83,15 @@ class NBAFunctionsTeams():
         message = st.chat_message('assistant')
         message.write('Aqui você encontra o Desempenho da equipe por Temporada, voce precisa inserir o ID do time.')
         teamYear_id = st.text_input('Digite o ID do Time sem pontos ou vírgula')
-
-        data_teamStats_years = self.api.get_team_year_stats(teamYear_id)
-        teamStats_columns = data_teamStats_years['resultSets'][0]['headers']
-        teamStats_rowSet = data_teamStats_years['resultSets'][0]['rowSet']
-        teamStats_df = pd.DataFrame(teamStats_rowSet, columns=teamStats_columns)
-        options_teamStats = st.multiselect("Filtrar por Temporada:", list(teamStats_df['YEAR']))
-        if options_teamStats:
-            filtered_data = teamStats_df[teamStats_df['YEAR'].isin(options_teamStats)]
-            st.write(filtered_data)
-        st.write(teamStats_df)
+        try:
+            data_teamStats_years = self.api.get_team_year_stats(teamYear_id)
+            teamStats_columns = data_teamStats_years['resultSets'][0]['headers']
+            teamStats_rowSet = data_teamStats_years['resultSets'][0]['rowSet']
+            teamStats_df = pd.DataFrame(teamStats_rowSet, columns=teamStats_columns)
+            options_teamStats = st.multiselect("Filtrar por Temporada:", list(teamStats_df['YEAR']))
+            if options_teamStats:
+                filtered_data = teamStats_df[teamStats_df['YEAR'].isin(options_teamStats)]
+                st.write(filtered_data)
+            st.write(teamStats_df)
+        except json.JSONDecodeError:
+            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
