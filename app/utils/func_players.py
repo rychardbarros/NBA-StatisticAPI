@@ -17,7 +17,7 @@ class NBAFunctionsPlayers():
             df = pd.DataFrame(data)
             st.write(df)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento!, Se demorar verifique se inseriu algo Errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def player_data(self):
         message = st.chat_message('assistant')
@@ -46,7 +46,7 @@ class NBAFunctionsPlayers():
             else:
                 st.write('As colunas necessárias ("SEASON_ID" e "TEAM_ABBREVIATION") não estão presentes nos dados do jogador.')
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def player_vs_player(self):
         message = st.chat_message('assistant')
@@ -66,7 +66,7 @@ class NBAFunctionsPlayers():
                 st.write(f'Campo: {table_name}')
                 st.write(df)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def draft_players(self):
         message = st.chat_message('assistant')
@@ -82,4 +82,4 @@ class NBAFunctionsPlayers():
                 st.write(filtered_data)
             st.write(df_draft)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')

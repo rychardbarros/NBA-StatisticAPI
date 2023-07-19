@@ -15,7 +15,7 @@ class NBAFunctionsTeams():
             df_team = pd.DataFrame(data_team)
             st.write(df_team)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def team_details(self):
         message = st.chat_message('assistant')
@@ -33,7 +33,7 @@ class NBAFunctionsTeams():
                 st.write(f'Campo: {table_name}')
                 st.write(df)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def franchise_history(self):
         message = st.chat_message('assistant')
@@ -77,7 +77,7 @@ class NBAFunctionsTeams():
                 else:
                     st.write(filtered_franchise)
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
 
     def team_stats_years(self):
         message = st.chat_message('assistant')
@@ -88,10 +88,33 @@ class NBAFunctionsTeams():
             teamStats_columns = data_teamStats_years['resultSets'][0]['headers']
             teamStats_rowSet = data_teamStats_years['resultSets'][0]['rowSet']
             teamStats_df = pd.DataFrame(teamStats_rowSet, columns=teamStats_columns)
+            st.write(teamStats_df)
+
             options_teamStats = st.multiselect("Filtrar por Temporada:", list(teamStats_df['YEAR']))
+            if not options_teamStats:
+                st.warning("Selecione uma ou mais Temporadas caso queira visualizar com Grafico.")
+                return
+
+            filtered_data = teamStats_df[teamStats_df['YEAR'].isin(options_teamStats)]
             if options_teamStats:
                 filtered_data = teamStats_df[teamStats_df['YEAR'].isin(options_teamStats)]
                 st.write(filtered_data)
-            st.write(teamStats_df)
+            else:
+                filtered_data = teamStats_df.copy()
+
+            columns_x = [
+                        'GP', 'WINS', 'LOSSES', 'WIN_PCT', 'CONF_RANK', 'DIV_RANK', 'PO_WINS',
+                        'PO_LOSSES', 'CONF_COUNT', 'DIV_COUNT', 'FGM', 
+                        'FGA', 'FG_PCT', 'FG3M', 'FG3A', 'FG3_PCT', 'FTM', 'FTA', 'FT_PCT', 'OREB', 
+                        'DREB', 'REB', 'AST', 'PF', 'STL', 'TOV', 'BLK', 'PTS', 'PTS_RANK'
+                        ]
+
+            if 'YEAR' in filtered_data.columns and 'TEAM_NAME' in filtered_data.columns:
+                filtered_data['YEAR'] = filtered_data['YEAR'] + ' - ' + filtered_data['TEAM_NAME']
+                chart_data = filtered_data[['YEAR'] + columns_x]
+                chart_data.set_index('YEAR', inplace=True)
+                st.bar_chart(chart_data)
+ 
         except json.JSONDecodeError:
-            st.write('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            st.warning('Aguarde um momento! Se demorar, verifique se não inseriu algo errado.')
+            
