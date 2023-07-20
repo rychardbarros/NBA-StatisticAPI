@@ -5,7 +5,7 @@ from src.api.service import API
 
 class NBAFunctionsPlayers():
     def __init__(self):
-        self.api = API(base_url="http://localhost:5000")
+        self.api = API(base_url="http://192.168.0.252:8080")
 
     def discover_player_id(self):
         message = st.chat_message('assistant')

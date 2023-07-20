@@ -62,4 +62,4 @@ def team_year_stats(id):
     return team_year_result
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.0.252', port=8080)
