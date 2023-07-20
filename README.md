@@ -77,10 +77,9 @@ The API provides the following endpoints for accessing NBA data:
 
     /team/stats/{id} (GET Method): Returns the statistics of a specific team based on its ID.
 # Layout
-![image](https://github.com/rychardbarros/NBA-StatisticAPI/assets/106812762/b81cc450-b697-4baa-97b3-fa98823dea7c)
+<img src="./public/img/nba01.png" />
 
----
-![image](https://github.com/rychardbarros/NBA-StatisticAPI/assets/106812762/e72b9490-1965-448a-99eb-7c95aa35110c)
+<img src="./public/img/nba02.png" />
 
 
 # License 📚
